@@ -14,6 +14,15 @@ def imdbcrawer(name):
 
 	#创建会话窗口
 	session = requests.Session()
+	#模拟登陆，可利用cookie
+
+	data1 = {
+	'name':'13246812392',
+	'password':'a123451234',
+	'remember':'false'
+	} 
+	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
+	session.post(url1,data=data1,headers=headers)
 
 	name = '复仇者联盟4'
 	#搜索豆瓣电影

@@ -69,7 +69,7 @@ def dbcrawer(name):
 					dy.write(str((2019-int(dby.group(1)))*12+6-int(dby.group(2)))+' ')
 				except AttributeError:
 					pass
-			#time.sleep(4+random.random())
+			time.sleep(4+random.random())
 				
 	
 
