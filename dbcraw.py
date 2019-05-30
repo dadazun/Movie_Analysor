@@ -21,25 +21,14 @@ def dbcrawer(name):
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
 	session.post(url1,data=data1,headers=headers)
-
-	#搜索电影
-	url3 = r'movie.douban.com/subject_search?'
-	data3 = {
-	'cat':'1002',
-	'search_text':name
+	#找到电影id(sid)
+	url0 = r'https://www.douban.com/j/search_suggest?'
+	data0 = {
+	'debug':'true',
+	'q':name
 	}
-	res3 = session.get(url3,headers=headers,params=data3)#在窗口输个网址,res3是对象.url是网址,.text是内容(.content内容.encode编码),还能查头等
-	#text是自动编码content是字节码(给出子节点,若已经搜索出节点用str);非必要，在最终影评页面为必要,中文
-	resp3 = BeautifulSoup(res3.content.decode('utf-8'),features="html.parser")#解析方法？
-
-	#找到目标电影即首项
-	#url4 = resp3.find("div",class_='result-list').find("a",href=True).attrs['href']#class是关键字,使用a['href']无子节点为nonetype
-	#目标电影链接和打开后链接不一致，分析发现每部电影对应一个id(sid)，其他都一样
-	url4 = resp3.find("div",class_='result-list').find("a",href=True)
-
-	#找sid
-	regex = compile(r'sid: (\d+)')
-	sid = regex.search(str(url4)).group(1)
+	res0 = session.get(url0,headers=headers,params=data0)
+	sid = compile(r'subject\\/(26100958)').search(res0.text).group(1)
 
 	#每页20条，共爬取25页
 	for page in range(25):

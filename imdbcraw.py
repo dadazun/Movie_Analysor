@@ -17,24 +17,16 @@ def imdbcrawer(name):
 
 	name = '复仇者联盟4'
 	#搜索豆瓣电影
-	url0 = r'movie.douban.com/subject_search?'
+	url0 = r'https://www.douban.com/j/search_suggest?'
 	data0 = {
-	'cat':'1002',
-	'search_text':name
+	'debug':'true',
+	'q':name
 	}
 	res0 = session.get(url0,headers=headers,params=data0)
-	#在窗口输网址,res3是对象.url是网址,.text是内容(.content内容.encode编码),还能查头等
-	resp0 = BeautifulSoup(res0.content.decode('utf-8'),features="html.parser")
-
-	#每部电影对应一个id(sid)
-	url1 = resp0.find("div",class_='result-list').find("a",href=True)
-
-	#找sid
-	regex1 = compile(r'sid: (\d+)')
-	sid1 = regex1.search(str(url1)).group(1)
+	sid = compile(r'subject\\/(26100958)').search(res0.text).group(1)
 
 	#进入豆瓣电影首页
-	res2 = session.get('https://movie.douban.com/subject/'+sid1)
+	res2 = session.get('https://movie.douban.com/subject/'+sid)
 
 	#获得电影的imdb的网址
 	regex2 = compile(r'http://www.imdb.com/title/([a-zA-Z]*\d*)')
