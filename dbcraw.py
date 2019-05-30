@@ -55,7 +55,7 @@ def dbcrawer(name):
 		dates = compile(r'comment-time " title="(\d{4})-(\d{2})-(\d{2}) ').finditer(res5.text)
 		with open(name+'dbscores.txt','a',encoding='utf-8') as sc:
 			for score,date in zip(scores,dates):
-				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+'/'+date.group(3)+',')
+				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+',')
 				
 	#用户信息耗时
 	for page in range(25):
