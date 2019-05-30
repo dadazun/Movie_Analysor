@@ -66,7 +66,7 @@ def imdbcrawer(name):
 			scores = compile(r'<span>(\d+)</span>').finditer(res4.text)
 			dates = compile(r'<span class="review-date">(\d+) ([a-zA-Z]+) (\d+)</span>').finditer(res4.text)
 			for score,date in zip(scores,dates):
-				sc.write(score.group(1)+' '+str(date.group(3))+'/'+str(mon[date.group(2)])+'/'+str(date.group(1))+',')
+				sc.write(score.group(1)+' '+str(date.group(3))+'/'+str(mon[date.group(2)])+',')
 				
 		#获取ajax加载的数据	
 		pk = resp4.find('div',class_='load-more-data').attrs['data-key']
