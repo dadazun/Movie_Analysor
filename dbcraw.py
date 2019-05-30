@@ -16,17 +16,17 @@ def dbcrawer(name):
 
 	data1 = {
 	'name':'13246812392',
-	'password':'a12345123',
+	'password':'a123451234',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
 	session.post(url1,data=data1,headers=headers)
 
 	#搜索电影
-	url3 = r'https://www.douban.com/search?'
+	url3 = r'movie.douban.com/subject_search?'
 	data3 = {
 	'cat':'1002',
-	'q':name
+	'search_text':name
 	}
 	res3 = session.get(url3,headers=headers,params=data3)#在窗口输个网址,res3是对象.url是网址,.text是内容(.content内容.encode编码),还能查头等
 	#text是自动编码content是字节码(给出子节点,若已经搜索出节点用str);非必要，在最终影评页面为必要,中文
