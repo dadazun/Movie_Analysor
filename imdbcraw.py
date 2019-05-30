@@ -17,10 +17,10 @@ def imdbcrawer(name):
 
 	name = '复仇者联盟4'
 	#搜索豆瓣电影
-	url0 = r'https://www.douban.com/search?'
+	url0 = r'movie.douban.com/subject_search?'
 	data0 = {
 	'cat':'1002',
-	'q':name
+	'search_text':name
 	}
 	res0 = session.get(url0,headers=headers,params=data0)
 	#在窗口输网址,res3是对象.url是网址,.text是内容(.content内容.encode编码),还能查头等
