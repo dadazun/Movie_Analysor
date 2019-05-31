@@ -71,7 +71,7 @@ def dbcrawer(name):
 				except AttributeError:
 					pass
 			time.sleep(4.5+random.random())
-			time.sleep(4.5+random.random())
+			
 				
 	
 
