@@ -28,10 +28,11 @@ def dbcrawer(name):
 	'q':name
 	}
 	res0 = session.get(url0,headers=headers,params=data0)
-	sid = compile(r'subject\\/(26100958)').search(res0.text).group(1)
+	sid = compile(r'subject\\/(\d+)').search(res0.text).group(1)
 
 	#每页20条，共爬取25页
 	for page in range(25):
+		time.sleep(4.5+random.random())
 		res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
 		resp5 = BeautifulSoup(res5.content.decode('utf-8'),features="html.parser")
 		#爬取影评
@@ -69,7 +70,8 @@ def dbcrawer(name):
 					dy.write(str((2019-int(dby.group(1)))*12+6-int(dby.group(2)))+' ')
 				except AttributeError:
 					pass
-			time.sleep(4+random.random())
+			time.sleep(4.5+random.random())
+			time.sleep(4.5+random.random())
 				
 	
 
