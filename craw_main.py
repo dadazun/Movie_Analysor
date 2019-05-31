@@ -6,7 +6,7 @@ import time
 def main():
 	localtime = time.localtime(time.time())
 	print(localtime)
-	name = '小时代'
+	name = '海王'
 	t1 = threading.Thread(target=imdbcrawer,args=(name,))
 	t2 = threading.Thread(target=dbcrawer,args=(name,))
 	t1.start()

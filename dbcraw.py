@@ -4,19 +4,19 @@ from bs4 import BeautifulSoup
 from re import compile
 import time
 import random
+from fake_useragent import UserAgent
 
 def dbcrawer(name):
 	headers = {
-	"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36",
+	"User-Agent": UserAgent().ie,
 	}
-
 	#创建会话窗口
 	session = requests.Session()
+	
 	#模拟登陆，可利用cookie
-
 	data1 = {
 	'name':'13246812392',
-	'password':'a123451234',
+	'password':'a12345123',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
@@ -29,7 +29,7 @@ def dbcrawer(name):
 	}
 	res0 = session.get(url0,headers=headers,params=data0)
 	sid = compile(r'subject\\/(\d+)').search(res0.text).group(1)
-
+	
 	#每页20条，共爬取25页
 	for page in range(25):
 		time.sleep(4.5+random.random())
@@ -60,7 +60,9 @@ def dbcrawer(name):
 			with open(name+'dbplaces.txt','a',encoding='utf-8') as plc:
 				try:
 					pl = resp11.find('div',class_='user-info').find('a').text
-					plc.write(pl+' ')
+					pl2 = compile(r'[\u4e00-\u9fa5]+').search(pl).group()
+					pl3 = compile(r'河北|山西|辽宁|吉林|黑龙江|江苏|浙江|安徽|福建|江西|山东|河南|湖北|广东|海南|湖南|四川|贵州|云南|陕西|甘肃|青海|台湾|内蒙古|广西|西藏|宁夏|新疆|台湾').sub('',pl)
+					plc.write(pl3+' ')
 				except AttributeError:
 					pass
 			#爬取用户豆龄
@@ -72,7 +74,9 @@ def dbcrawer(name):
 					pass
 			time.sleep(4.5+random.random())
 			
-				
+if __name__ == '__main__':
+	dbcrawer('复仇者联盟4')
+			
 	
 
 

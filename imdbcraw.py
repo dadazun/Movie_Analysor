@@ -114,3 +114,6 @@ def imdbcrawer(name):
 			pass
 		page += 1
 
+			
+if __name__ == '__main__':
+	imdbcrawer('复仇者联盟4')
