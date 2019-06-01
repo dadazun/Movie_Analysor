@@ -8,7 +8,7 @@ from fake_useragent import UserAgent
 
 def dbcrawer(name):
 	headers = {
-	"User-Agent": UserAgent().ie,
+	"User-Agent": UserAgent().random,
 	}
 	#创建会话窗口
 	session = requests.Session()

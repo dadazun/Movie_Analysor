@@ -6,13 +6,15 @@ import time
 def main():
 	localtime = time.localtime(time.time())
 	print(localtime)
-	name = '海王'
-	t1 = threading.Thread(target=imdbcrawer,args=(name,))
-	t2 = threading.Thread(target=dbcrawer,args=(name,))
-	t1.start()
-	t2.start()
-	t1.join()
-	t2.join()
+	name = '阿拉丁'
+	targets = [imdbcrawer,dbcrawer]
+	threads = []
+	for target in targets:
+		threads.append(threading.Thread(target=target,args=(name,)))
+	for thread in threads:
+		thread.start()
+	for thread in threads:
+		thread.join()
 	localtime = time.localtime(time.time())
 	print(localtime)
 	print('完成')
