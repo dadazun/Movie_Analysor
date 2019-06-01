@@ -16,7 +16,7 @@ def dbcrawer(name):
 	#模拟登陆，可利用cookie
 	data1 = {
 	'name':'13246812392',
-	'password':'a12345123',
+	'password':'a123451234',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
@@ -45,7 +45,7 @@ def dbcrawer(name):
 		dates = compile(r'comment-time " title="(\d{4})-(\d{2})-(\d{2}) ').finditer(res5.text)
 		with open(name+'dbscores.txt','a',encoding='utf-8') as sc:
 			for score,date in zip(scores,dates):
-				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+',')
+				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+'/'+date.group(3)+',')
 				
 	#用户信息耗时
 	for page in range(25):

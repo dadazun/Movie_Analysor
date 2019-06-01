@@ -71,12 +71,12 @@ def imdbcrawer(name):
 				rv.write(li.text)
 			
 		
-		#爬取评分
+		#爬取评分和日期
 		with open(name+'Dscores.txt','a',encoding='utf-8') as sc:
 			scores = compile(r'<span>(\d+)</span>').finditer(res4.text)
 			dates = compile(r'<span class="review-date">(\d+) ([a-zA-Z]+) (\d+)</span>').finditer(res4.text)
 			for score,date in zip(scores,dates):
-				sc.write(score.group(1)+' '+str(date.group(3))+'/'+str(mon[date.group(2)])+',')
+				sc.write(score.group(1)+' '+date.group(3)+'/'+str(mon[date.group(2)])+'/'+date.group(1)+',')
 				
 		#获取ajax加载的数据	
 		try:
@@ -92,7 +92,6 @@ def imdbcrawer(name):
 		page += 1
 
 	#最后运行D龄
-
 	resp4 = resp3
 	res4 = res3
 	page = 0	

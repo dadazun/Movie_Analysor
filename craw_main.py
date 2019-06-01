@@ -6,7 +6,7 @@ import time
 def main():
 	localtime = time.localtime(time.time())
 	print(localtime)
-	name = '阿拉丁'
+	name = '海王'
 	targets = [imdbcrawer,dbcrawer]
 	threads = []
 	for target in targets:
