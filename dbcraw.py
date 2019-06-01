@@ -32,7 +32,7 @@ def dbcrawer(name):
 	
 	#每页20条，共爬取25页
 	for page in range(25):
-		time.sleep(4.5+random.random())
+		time.sleep(4.8+random.random())
 		res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
 		resp5 = BeautifulSoup(res5.content.decode('utf-8'),features="html.parser")
 		#爬取影评
@@ -63,16 +63,16 @@ def dbcrawer(name):
 					pl2 = compile(r'[\u4e00-\u9fa5]+').search(pl).group()
 					pl3 = compile(r'河北|山西|辽宁|吉林|黑龙江|江苏|浙江|安徽|福建|江西|山东|河南|湖北|广东|海南|湖南|四川|贵州|云南|陕西|甘肃|青海|台湾|内蒙古|广西|西藏|宁夏|新疆|台湾').sub('',pl)
 					plc.write(pl3+' ')
-				except AttributeError:
+				except:#AttributeError，以及网络问题
 					pass
 			#爬取用户豆龄
 			with open(name+'dby.txt','a',encoding='utf-8') as dy:
 				try:
 					dby = compile(r'(\d{4})-(\d{2})-(\d{2})加入').search(res11.text)
 					dy.write(str((2019-int(dby.group(1)))*12+6-int(dby.group(2)))+' ')
-				except AttributeError:
+				except:#AttributeError
 					pass
-			time.sleep(4.5+random.random())
+			time.sleep(4.8+random.random())
 			
 if __name__ == '__main__':
 	dbcrawer('复仇者联盟4')
