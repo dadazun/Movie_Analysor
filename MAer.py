@@ -1,36 +1,65 @@
 #coding = utf-8
 import tkinter as tk
 import os
-
+import time
+from craw_main import *
 #设置按键command对应函数
 def search_movie():
+	for count in (1,2):
 	#检查所要搜索的电影是否在数据库中
-	movie_name=moviename.get()
-	c_add = os.getcwd()
-	if movie_name == '' or movie_name =='请输入电影名':
-	    return 0
-	else:
-		path = c_add+'/'+movie_name
-		if os.path.exists(path):
-			c_add = os.getcwd()
-			#此处要改！！！改掉图片名！！！
-			os.startfile(c_add + '/' + movie_name+'/图1.png')
-			os.startfile(c_add + '/' + movie_name+'/图2.png')
-		#若不在库中，则弹窗提醒
+		movie_name=moviename.get()
+		c_add = os.getcwd()
+		if movie_name == '' or movie_name =='请输入电影名':
+			return 0
 		else:
-			remind = tk.Toplevel()
-			remind.title('Error!')
-			remind_bg=tk.Canvas(remind, bg='white',height=210,width=350)
-			remind_bg.pack()
-			message = tk.Label(remind, text='你所搜索的电影信息尚未收集!',
-			    font=('微软雅黑',18),bg='white',fg = '#00bff3')#00bff3
-			message.place(x=175,y=85,anchor='center')
+			path = c_add+'/'+movie_name
+			if os.path.exists(path):
+				c_add = os.getcwd()
+				#休眠半秒，这样不会弹出多个窗口
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'douban饼图.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'IMDB饼图.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'中文词云图.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'wordcloud.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'dbScore.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'IMDBScore.html')
+				time.sleep(0.5)
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'dbhotpoint.html')
+				
+				info = tk.Toplevel()
+				info.title('评分信息')
+				info_bg=tk.Canvas(info, bg='white',height=210,width=350)
+				info_bg.pack()
+				with open(path+'/'+movie_name+'Points.txt','r+',encoding='utf-8') as po:
+					inf = po.read()
+				movie_title = tk.Label(info, text = movie_name,
+					font=('黑体',20),bg='white',fg='#00bff3')
+				movie_title.place(x=175,y=40,anchor='center')
+				message2 = tk.Label(info, text = inf,
+					font=('微软雅黑',18),bg='white',fg='#00bff3')
+				message2.place(x=185,y=150,anchor='center')
+				info.mainloop()
+				break
+			#若不在库中，则弹窗提醒
+			else:
+				mes = tk.Toplevel()
+				mes.title('提示信息')
+				mes_bg=tk.Canvas(mes,bg='white',height=210,width=350)
+				mes_bg.pack()
+				mes_message=tk.Label(mes,text='请耐心等待爬虫运行...',
+					font=('黑体',20),bg='white',fg='#00bff3')
+				mes_message.place(x=175,y=40,anchor='center')
+				time.sleep(5)
+				mes.destroy
+				os.makedirs(movie_name)
+				main(movie_name)
 			
-			back_file = tk.PhotoImage(file = 'back.png')
-			backbutton = tk.Button(remind, image = back_file, command=remind.destroy)
-			backbutton.place(x=175,y=150,anchor='center')
-			remind.mainloop()
-
+			
+		
 
 
 #设置窗口，名字，背景，标题等
@@ -42,10 +71,10 @@ title_file=tk.PhotoImage(file= 'title.png')
 title = tk.Label(window,image=title_file)
 title.place(x=400,y=100,anchor='center')
 writer=tk.Label(window,
-    text = '制作者：Py三人行'+'\n'+'Movie Analyzer',
-    font=('微软雅黑',10),
-    bg = 'white',fg = '#66ccff'
-    )
+	text = '制作者：Py三人行'+'\n'+'Movie Analyzer',
+	font=('微软雅黑',10),
+	bg = 'white',fg = '#66ccff'
+	)
 writer.place(x=400,y=400,anchor='center')
 
 #设置搜索框以及对应文本
@@ -56,8 +85,11 @@ entry_moviename.place(x=360,y=250,anchor='center')
 #设置搜索按键
 search_file=tk.PhotoImage(file='search.png')
 searchbutton = tk.Button(window,
-    image=search_file,
-    command = search_movie)
+	image=search_file,
+	command = search_movie)
+
 searchbutton.place(x=575,y=248,anchor='center')
 #必要！
 window.mainloop()
+	
+

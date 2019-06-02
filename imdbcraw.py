@@ -17,8 +17,8 @@ def imdbcrawer(name):
 	#模拟登陆，可利用cookie
 	'''
 	data1 = {
-	'name':'13246812392',
-	'password':'a123451234',
+	'name':'18617133843',
+	'password':'qq704748114',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
@@ -37,7 +37,7 @@ def imdbcrawer(name):
 	#进入豆瓣电影首页
 	res2 = session.get('https://movie.douban.com/subject/'+sid,headers=headers)
 	#获得豆瓣评分
-	with open(name+'Points.txt','a',encoding='utf-8') as pt:
+	with open(name+'\\'+name+'Points.txt','a',encoding='utf-8') as pt:
 		rr2 = BeautifulSoup(res2.text,features="html.parser")
 		pt.write('豆瓣:'+rr2.find('strong',class_="ll rating_num").text+'/10 ')
 		pt.write(rr2.find('span',property="v:votes").text+'人评价\n')
@@ -45,7 +45,7 @@ def imdbcrawer(name):
 	regex2 = compile(r'http://www.imdb.com/title/([a-zA-Z]*\d*)')
 	mid = regex2.search(res2.text).group(1)
 	#获得IMDB评分
-	with open(name+'Points.txt','a',encoding='utf-8') as pt:
+	with open(name+'\\'+name+'Points.txt','a',encoding='utf-8') as pt:
 		r1 = requests.get(r'https://www.imdb.com/title/'+mid,headers=headers)
 		rr1 = BeautifulSoup(r1.text,features="html.parser")
 		pt.write('IMDB:'+rr1.find('span',itemprop="ratingValue").text+'/10 ')
@@ -65,14 +65,14 @@ def imdbcrawer(name):
 	while page<20:
 		
 		#爬取影评，筛去包含剧透的
-		with open(name+'Dreview.txt','a',encoding='utf-8') as rv:
+		with open(name+'\\'+name+'Dreview.txt','a',encoding='utf-8') as rv:
 			lis4 = resp4.find_all("div",class_="text show-more__control")#获得标签集合
 			for li in lis4:
 				rv.write(li.text)
 			
 		
 		#爬取评分和日期
-		with open(name+'Dscores.txt','a',encoding='utf-8') as sc:
+		with open(name+'\\'+name+'Dscores.txt','a',encoding='utf-8') as sc:
 			scores = compile(r'<span>(\d+)</span>').finditer(res4.text)
 			dates = compile(r'<span class="review-date">(\d+) ([a-zA-Z]+) (\d+)</span>').finditer(res4.text)
 			for score,date in zip(scores,dates):
@@ -97,7 +97,7 @@ def imdbcrawer(name):
 	page = 0	
 	while page<20:
 		#爬取D龄,耗时
-		with open(name+'Dy.txt','a',encoding='utf-8') as dy:
+		with open(name+'\\'+name+'Dy.txt','a',encoding='utf-8') as dy:
 			regex10 = compile(r'/user/\w+/')#开发者工具所得与requests所得不同
 			sites = regex10.findall(res4.text)
 			for site in sites:
@@ -123,6 +123,6 @@ def imdbcrawer(name):
 			pass
 		page += 1
 
-			
+		
 if __name__ == '__main__':
 	imdbcrawer('复仇者联盟4')

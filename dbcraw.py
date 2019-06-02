@@ -15,8 +15,8 @@ def dbcrawer(name):
 	
 	#模拟登陆，可利用cookie
 	data1 = {
-	'name':'13246812392',
-	'password':'a123451234',
+	'name':'18617133843',
+	'password':'qq704748114',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
@@ -36,14 +36,14 @@ def dbcrawer(name):
 		res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
 		resp5 = BeautifulSoup(res5.content.decode('utf-8'),features="html.parser")
 		#爬取影评
-		with open(name+'dbreview.txt','a',encoding='utf-8') as rv:
+		with open(name+'\\'+name+'dbreview.txt','a',encoding='utf-8') as rv:
 			sho5 = resp5.find_all("span",class_='short')#注意下划线，否则是re方法
 			for so in sho5:
 				rv.write(so.text)#此处获得的是tag的集合，循环获得字符串 [].string/text，text更优string多个返回none
 		#爬取评分和日期
 		scores = compile(r'allstar\d{2} rating" title="(\w+)"').finditer(res5.text)
 		dates = compile(r'comment-time " title="(\d{4})-(\d{2})-(\d{2}) ').finditer(res5.text)
-		with open(name+'dbscores.txt','a',encoding='utf-8') as sc:
+		with open(name+'\\'+name+'dbscores.txt','a',encoding='utf-8') as sc:
 			for score,date in zip(scores,dates):
 				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+'/'+date.group(3)+',')
 				
@@ -57,7 +57,7 @@ def dbcrawer(name):
 			res11 = session.get(url.group(1),headers=headers)
 			resp11 = BeautifulSoup(res11.content.decode('utf-8'),features="html.parser")
 			#爬取地区
-			with open(name+'dbplaces.txt','a',encoding='utf-8') as plc:
+			with open(name+'\\'+name+'dbplaces.txt','a',encoding='utf-8') as plc:
 				try:
 					pl = resp11.find('div',class_='user-info').find('a').text
 					pl2 = compile(r'[\u4e00-\u9fa5]+').search(pl).group()
@@ -66,7 +66,7 @@ def dbcrawer(name):
 				except:#AttributeError，以及网络问题
 					pass
 			#爬取用户豆龄
-			with open(name+'dby.txt','a',encoding='utf-8') as dy:
+			with open(name+'\\'+name+'dby.txt','a',encoding='utf-8') as dy:
 				try:
 					dby = compile(r'(\d{4})-(\d{2})-(\d{2})加入').search(res11.text)
 					dy.write(str((2019-int(dby.group(1)))*12+6-int(dby.group(2)))+' ')
