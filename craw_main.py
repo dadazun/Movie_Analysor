@@ -14,7 +14,7 @@ from rediantu import *
 def main(name):
 	localtime = time.localtime(time.time())
 	print(localtime)
-	'''
+
 	print('爬虫运行中...')
 	targets = [imdbcrawer,dbcrawer]
 	threads = []
@@ -24,7 +24,7 @@ def main(name):
 		thread.start()
 	for thread in threads:
 		thread.join()
-		'''
+	
 	localtime = time.localtime(time.time())
 
 	#上面爬虫，下面出图
