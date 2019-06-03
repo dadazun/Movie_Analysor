@@ -41,7 +41,7 @@ def IMDBscore(movie_name):
 			   )
 
 	themeriver.render(movie_name+'\\'+movie_name+'IMDBScore.html')
-	
-IMDBscore('复仇者联盟4')
+if __name__ == '__main__':
+	IMDBscore('复仇者联盟4')
 			
 	

@@ -33,7 +33,8 @@ def ciyun_en(movie_name):
              )
 	words_cloud.render(movie_name+'\\'+movie_name+'wordcloud.html')
 
-ciyun_en('复仇者联盟4')
+if __name__ == '__main__':
+	ciyun_en('复仇者联盟4')
 
 	
 	

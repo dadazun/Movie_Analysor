@@ -44,8 +44,10 @@ def ciyun_ch(movie_name):
 				 ,toolbox_opts=opts.ToolboxOpts(is_show=True))
 				 )
 	words_cloud.render(movie_name+'\\'+movie_name+'中文词云图.html')
-	
-ciyun_ch('复仇者联盟4')
+
+
+if __name__ == '__main__':
+	ciyun_ch('复仇者联盟4')
 
 
 

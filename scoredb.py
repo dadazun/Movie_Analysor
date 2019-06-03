@@ -43,6 +43,7 @@ def dbscore(movie_name):
 			   )
 
 	themeriver.render(movie_name+'\\'+movie_name+'dbScore.html')
-dbscore('复仇者联盟4')
+if __name__ == '__main__':
+	sdbscore('复仇者联盟4')
 			
 	

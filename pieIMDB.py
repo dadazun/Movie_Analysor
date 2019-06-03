@@ -37,8 +37,8 @@ def IMDB_months(movie_name):
 		.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
 		)
 	pie.render(movie_name+'\\'+movie_name+'IMDB饼图.html')
-	
-IMDB_months('复仇者联盟4')
+if __name__ == '__main__':
+	IMDB_months('复仇者联盟4')
 
 
 

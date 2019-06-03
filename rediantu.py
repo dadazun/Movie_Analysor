@@ -33,6 +33,7 @@ def hotpoint(movie_name):
 
 
 	heat_map.render(movie_name+'\\'+movie_name+'dbhotpoint.html')
-hotpoint('复仇者联盟4')
+if __name__ == '__main__':
+	hotpoint('复仇者联盟4')
 
 

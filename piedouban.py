@@ -38,7 +38,8 @@ def db_months(movie_name):
 		)
 	pie.render(movie_name+'\\'+movie_name+'douban饼图.html')
 	
-db_months('复仇者联盟4')
+if __name__ == '__main__':
+	db_months('复仇者联盟4')
 
 
 
