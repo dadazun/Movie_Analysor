@@ -6,8 +6,9 @@ from pyecharts.charts import Geo
 from collections import Counter
 import string
 def hotpoint(movie_name):
-	with open(movie_name+'\\'+movie_name+'dbplaces.txt','r+',encoding='utf-8') as f:
+	with open(movie_name+'\\'+movie_name+'dbplaces.txt','r+',encoding='utf-8-sig') as f:
 		heat_1 = f.read()
+		print(heat_1)
 		for i in heat_1:
 			if i in string.punctuation:
 				heat_1=heat_1.replace(i,"")
@@ -18,7 +19,7 @@ def hotpoint(movie_name):
 	for place,times in heat_dic.items():
 		c_word=(place,times)
 		heat_list.append(c_word)	
-
+	print(heat_list)
 
 	heat_map = (
 			Geo()
@@ -34,6 +35,6 @@ def hotpoint(movie_name):
 
 	heat_map.render(movie_name+'\\'+movie_name+'dbhotpoint.html')
 if __name__ == '__main__':
-	hotpoint('复仇者联盟4')
+	hotpoint('流浪地球')
 
 
