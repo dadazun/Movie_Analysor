@@ -36,7 +36,7 @@ def IMDBscore(movie_name):
 			   .add(
 				   ['好评','中评','差评'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
-			   .set_global_opts(title_opts=opts.TitleOpts(title="主题河流图-IMDB",subtitle=None)
+			   .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" IMDB评价分布主题河流图",subtitle=None)
 			   ,toolbox_opts=opts.ToolboxOpts(is_show=True))
 			   )
 

@@ -38,7 +38,7 @@ def dbscore(movie_name):
 			   .add(
 				   ['很差','较差','还行','推荐','力荐'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
-			   .set_global_opts(title_opts=opts.TitleOpts(title="主题河流图-豆瓣" ,subtitle=None),
+			   .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" 豆瓣评价分布主题河流图" ,subtitle=None),
 			   toolbox_opts=opts.ToolboxOpts(is_show=True))
 			   )
 

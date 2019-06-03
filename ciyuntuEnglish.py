@@ -28,7 +28,7 @@ def ciyun_en(movie_name):
 	words_cloud=(
              WordCloud()
              .add("", words_list, word_size_range=[20, 100],shape="diamond")
-             .set_global_opts(title_opts=opts.TitleOpts(title="WordCloud-Review",subtitle=None)
+             .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" WordCloud",subtitle=None)
              ,toolbox_opts=opts.ToolboxOpts(is_show=True))
              )
 	words_cloud.render(movie_name+'\\'+movie_name+'wordcloud.html')

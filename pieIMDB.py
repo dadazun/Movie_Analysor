@@ -28,7 +28,7 @@ def IMDB_months(movie_name):
 		.add(
 			"",month_list,radius=["40%", "75%"])
 		.set_global_opts(
-			title_opts=opts.TitleOpts(title="饼图",subtitle=None),
+			title_opts=opts.TitleOpts(title=movie_name+" IMDB“D龄”分布图",subtitle='单位:月'),
 			toolbox_opts=opts.ToolboxOpts(is_show=True),
 			legend_opts=opts.LegendOpts(
 			orient="vertical", pos_top="15%", pos_left="2%"

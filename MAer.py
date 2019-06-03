@@ -44,8 +44,10 @@ def search_movie():
 				message2.place(x=185,y=150,anchor='center')
 				info.mainloop()
 				break
-			#若不在库中，则弹窗提醒
+			#若不在库中，则调用爬虫程序
 			else:
+				print('请耐心等待爬虫运行...')
+				'''
 				mes = tk.Toplevel()
 				mes.title('提示信息')
 				mes_bg=tk.Canvas(mes,bg='white',height=210,width=350)
@@ -55,6 +57,7 @@ def search_movie():
 				mes_message.place(x=175,y=40,anchor='center')
 				time.sleep(5)
 				mes.destroy
+				'''
 				os.makedirs(movie_name)
 				main(movie_name)
 			

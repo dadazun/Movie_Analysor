@@ -27,7 +27,7 @@ def hotpoint(movie_name):
 			.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
 			.set_global_opts(
 					visualmap_opts=opts.VisualMapOpts(),
-					title_opts=opts.TitleOpts(title="GEO-豆瓣",subtitle=None)
+					title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
 			,toolbox_opts=opts.ToolboxOpts(is_show=True))
 			)
 
