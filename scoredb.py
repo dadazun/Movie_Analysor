@@ -3,11 +3,13 @@ from pyecharts import options as opts
 from pyecharts.charts import Page, ThemeRiver
 from pyecharts.globals import ThemeType
 def dbscore(movie_name):
+	#读取数据
 	with open(movie_name+'\\'+movie_name+'dbscores.txt','r+',encoding='utf-8') as m:
 		allthings = m.read().split(',')
 		del allthings[-1]
 		all_date=[]
 		points_dic={}
+		#按评价进行分类
 		for div in allthings:
 			point,date = div.split()
 			if date not in all_date:
@@ -23,7 +25,7 @@ def dbscore(movie_name):
 				points_dic[date]['推荐']+=1
 			else:
 				points_dic[date]['力荐']+=1
-				
+		#处理数据		
 		data = []	
 		for month, grade in points_dic.items():
 			for hzc, num in grade.items():
@@ -32,7 +34,7 @@ def dbscore(movie_name):
 				counting.append(num)
 				counting.append(hzc)
 				data.append(counting)
-
+	#出图
 	themeriver=(
 			   ThemeRiver(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
 			   .add(
@@ -45,6 +47,6 @@ def dbscore(movie_name):
 
 	themeriver.render(movie_name+'\\'+movie_name+'dbScore.html')
 if __name__ == '__main__':
-	dbscore('无间道风云')
+	dbscore('大侦探皮卡丘')
 			
 	

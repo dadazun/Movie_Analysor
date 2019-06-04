@@ -4,10 +4,12 @@ from pyecharts.charts import Page, Parallel
 from pyecharts.globals import SymbolType
 from pyecharts.charts import Page, Pie
 def IMDB_months(movie_name):
+	#读取用户数据
 	filename=movie_name+'\\'+movie_name+'Dy.txt'
 	with open(filename,'r+',encoding='utf-8') as f:
 		year_1 = f.read()
 		years=year_1.split()
+	#进行分类分层
 	time={'0<x<=40':0,'40<x<=80':0,'80<x<=120':0,'120<x<=160':0,'160<x<=200':0,'x>200':0}
 	for x in years:	
 		if int(x) < 40:
@@ -22,7 +24,9 @@ def IMDB_months(movie_name):
 			time['160<x<=200']+=1
 		else:
 			time['x>200']+=1
+	#整理
 	month_list=time.items()
+	#出图
 	pie=(
 		Pie()
 		.add(

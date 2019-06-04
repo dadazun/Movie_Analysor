@@ -36,13 +36,13 @@ def IMDBscore(movie_name):
 			   .add(
 				   ['好评','中评','差评'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
-			   .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" IMDB评价分布图",subtitle=None)
+			   .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" IMDB评价分布主题河流图",subtitle=None)
 			   ,toolbox_opts=opts.ToolboxOpts(is_show=True),
 			   datazoom_opts=[opts.DataZoomOpts(is_show=True,range_start=0,range_end=100)])
 			   )
 
 	themeriver.render(movie_name+'\\'+movie_name+'IMDBScore.html')
 if __name__ == '__main__':
-	IMDBscore('无间道风云')
+	IMDBscore('大侦探皮卡丘')
 			
 	

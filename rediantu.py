@@ -6,6 +6,7 @@ from pyecharts.charts import Geo
 from collections import Counter
 import string
 def hotpoint(movie_name):
+	#读取城市数据
 	with open(movie_name+'\\'+movie_name+'dbplaces.txt','r+',encoding='utf-8-sig') as f:
 		heat_1 = f.read()
 		for i in heat_1:
@@ -13,12 +14,12 @@ def hotpoint(movie_name):
 				heat_1=heat_1.replace(i,"")
 		heat=heat_1.split()
 		heat_dic=Counter(heat)
-
+	#整理数据
 	heat_list=[]
 	for place,times in heat_dic.items():
 		c_word=(place,times)
 		heat_list.append(c_word)	
-
+	#出图
 	heat_map = (
 			Geo()
 			.add_schema(maptype="china")

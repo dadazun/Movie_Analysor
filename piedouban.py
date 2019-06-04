@@ -4,10 +4,12 @@ from pyecharts.charts import Page, Parallel
 from pyecharts.globals import SymbolType
 from pyecharts.charts import Page, Pie
 def db_months(movie_name):
+	#读取用户数据
 	filename=movie_name+'\\'+movie_name+'dby.txt'
 	with open(filename,'r+',encoding='utf-8') as f:
 		year_1 = f.read()
 		years=year_1.split()
+	#进行分层分类
 	time={'0<x<=25':0,'25<x<=50':0,'50<x<=75':0,'75<x<=100':0,'100<x<=125':0,'x>125':0}
 	for x in years:	
 		if int(x) < 25:
@@ -22,7 +24,9 @@ def db_months(movie_name):
 			time['100<x<=125']+=1
 		else:
 			time['x>125']+=1
+	#整理数据
 	month_list=time.items()
+	#出图
 	pie=(
 		Pie()
 		.add(

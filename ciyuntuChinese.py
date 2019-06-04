@@ -31,7 +31,7 @@ def ciyun_ch(movie_name):
 	#整理
 	word_list=[]
 	for words,times in review_dic.items():
-		if words in stop:
+		if words in stop or times<9:
 			continue
 		else:
 			b_word=(words,times)
@@ -47,7 +47,7 @@ def ciyun_ch(movie_name):
 
 
 if __name__ == '__main__':
-	ciyun_ch('复仇者联盟4')
+	ciyun_ch('大侦探皮卡丘')
 
 
 
