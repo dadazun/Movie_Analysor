@@ -14,7 +14,7 @@ def imdbcrawer(name):
 
 	#创建会话窗口
 	session = requests.Session()
-	#模拟登陆，可利用cookie
+	#模拟登陆
 	'''
 	data1 = {
 	'name':'18617133843',
@@ -41,7 +41,7 @@ def imdbcrawer(name):
 		rr2 = BeautifulSoup(res2.text,features="html.parser")
 		pt.write('豆瓣:'+rr2.find('strong',class_="ll rating_num").text+'/10 ')
 		pt.write(rr2.find('span',property="v:votes").text+'人评价\n')
-	#获得电影的imdb的网址
+	#从豆瓣获得电影的imdb的网址
 	regex2 = compile(r'http://www.imdb.com/title/([a-zA-Z]*\d*)')
 	mid = regex2.search(res2.text).group(1)
 	#获得IMDB评分

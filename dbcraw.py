@@ -13,10 +13,10 @@ def dbcrawer(name):
 	#创建会话窗口
 	session = requests.Session()
 	
-	#模拟登陆，可利用cookie
+	#模拟登陆
 	data1 = {
-	'name':'18617133843',
-	'password':'qq704748114',
+	'name':'13246812392',
+	'password':'a12345123',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
