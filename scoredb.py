@@ -39,11 +39,12 @@ def dbscore(movie_name):
 				   ['很差','较差','还行','推荐','力荐'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
 			   .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" 豆瓣评价分布图" ,subtitle=None),
-			   toolbox_opts=opts.ToolboxOpts(is_show=True))
+			   toolbox_opts=opts.ToolboxOpts(is_show=True),
+			   datazoom_opts=[opts.DataZoomOpts(is_show=True,range_start=0,range_end=100)])
 			   )
 
 	themeriver.render(movie_name+'\\'+movie_name+'dbScore.html')
 if __name__ == '__main__':
-	dbscore('大侦探皮卡丘')
+	dbscore('无间道风云')
 			
 	
