@@ -1,2 +1,2 @@
 # hello-world
-一个棒棒的imdb加db电影分析
+一个棒棒的IMDB和豆瓣电影分析
