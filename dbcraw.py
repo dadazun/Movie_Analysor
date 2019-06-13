@@ -32,8 +32,11 @@ def dbcrawer(name):
 	
 	#每页20条，共爬取25页
 	for page in range(25):
-		time.sleep(4.8+random.random())
-		res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
+		try:
+			res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
+		except:
+			print('豆瓣影评不足')
+			break
 		resp5 = BeautifulSoup(res5.content.decode('utf-8'),features="html.parser")
 		#爬取影评
 		with open(name+'\\'+name+'dbreview.txt','a',encoding='utf-8') as rv:
@@ -46,10 +49,14 @@ def dbcrawer(name):
 		with open(name+'\\'+name+'dbscores.txt','a',encoding='utf-8') as sc:
 			for score,date in zip(scores,dates):
 				sc.write(score.group(1)+' '+date.group(1)+'/'+date.group(2)+'/'+date.group(3)+',')
+		time.sleep(4.8+random.random())
 				
 	#用户信息耗时
 	for page in range(25):
-		res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
+		try:
+			res5 = session.get(r"https://movie.douban.com/subject/"+sid+r'/comments?start='+str(page*20)+r'&amp;limit=20&amp;sort=new_score&amp;status=P',headers=headers)
+		except:
+			break
 		resp5 = BeautifulSoup(res5.content.decode('utf-8'),features="html.parser")
 		#获取用户页面
 		urls = compile(r'(https://www.douban.com/people/\w+)/" class').finditer(res5.text)

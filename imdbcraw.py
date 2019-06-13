@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from re import compile
 import time
 import random
-
+#修改了break
 	
 #获得影评页面
 def imdbcrawer(name):
@@ -82,13 +82,11 @@ def imdbcrawer(name):
 		try:
 			pk = resp4.find('div',class_='load-more-data').attrs['data-key']
 		except:
-			print('imdb 影评数不足,豆瓣还在努力')
-		try:
+			print('imdb 影评数不足')
+			break
 			url4 = r'https://www.imdb.com/title/'+mid+r'/reviews/_ajax?sort=helpfulnessScore&dir=desc&spoiler=hide&ratingFilter=0&ref_=undefined&paginationKey='+pk#mbffakl4gd45zswcrfg4cbaqu4ovkuqheyjg2efoy75dmv4chur2imliyopd6affyecdbnt6v7vsg
 			res4 = session.get(url4,headers=headers)
 			resp4 = BeautifulSoup(res4.text,features="html.parser")
-		except:
-			pass
 		page += 1
 
 	#最后运行D龄
@@ -114,13 +112,10 @@ def imdbcrawer(name):
 		try:
 			pk = resp4.find('div',class_='load-more-data').attrs['data-key']
 		except:
-			print('imdb 影评数不足，豆瓣还在努力')
-		try:
+			break
 			url4 = r'https://www.imdb.com/title/'+mid+r'/reviews/_ajax?sort=helpfulnessScore&dir=desc&spoiler=hide&ratingFilter=0&ref_=undefined&paginationKey='+pk#mbffakl4gd45zswcrfg4cbaqu4ovkuqheyjg2efoy75dmv4chur2imliyopd6affyecdbnt6v7vsg
 			res4 = session.get(url4,headers=headers)
 			resp4 = BeautifulSoup(res4.text,features="html.parser")
-		except:
-			pass
 		page += 1
 
 		
