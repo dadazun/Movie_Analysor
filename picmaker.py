@@ -7,6 +7,8 @@ import jieba
 import string
 from collections import Counter
 from wordcloud import STOPWORDS
+from textblob import TextBlob
+from snownlp import SnowNLP
 
 def showing_pics(movie_name):
 	#生成页面
@@ -274,6 +276,77 @@ def showing_pics(movie_name):
 					title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
 			,toolbox_opts=opts.ToolboxOpts(is_show=True))
 			)	
+			
+	#中文情感分析图
+	with open(movie_name+'\\'+movie_name+"dbreview.txt",'r',encoding='utf-8') as f:
+		
+		text = f.read()
+		s = SnowNLP(text)
+		chn_senti = []
+		for sent in s.sentences:
+			chn_senti.append(SnowNLP(sent).sentiments)
+	times={'0<=x<=0.25':0,'0.25<x<=0.5':0,'0.5<x<=0.75':0,'0.75<x<=1':0}
+	for x in chn_senti:
+		if x < 0 or x > 1:
+			continue
+		elif x <= 0.25:
+			times['0<=x<=0.25']+=1
+		elif x <= 0.5:
+			times['0.25<x<=0.5']+=1
+		elif x <= 0.75:
+			times['0.5<x<=0.75']+=1
+		else:
+			times['0.75<x<=1']+=1
+	scores_list=times.items()
+	ch_motion=(
+		Pie()
+		.add(
+			"",scores_list,radius=["40%", "75%"])
+		.set_global_opts(
+			title_opts=opts.TitleOpts(title=movie_name+"豆瓣用户评论情感分析图",subtitle=None),
+			toolbox_opts=opts.ToolboxOpts(is_show=True),
+			legend_opts=opts.LegendOpts(
+			orient="vertical", pos_top="15%", pos_left="2%"
+			),
+		 )
+		.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+		)
+		
+	#英文情感分析图
+	with open(movie_name+'\\'+movie_name+"Dreview.txt",'r',encoding='utf-8') as f:
+		
+		text = f.read()
+		blob = TextBlob(text)
+		eng_senti = []
+
+		for sent in blob.sentences:
+			eng_senti.append(sent.sentiment.polarity)
+	time={'-1<=x<=-0.5':0,'-0.5<x<=0':0,'0<x<=0.5':0,'0.5<x<=1':0}
+	for x in eng_senti:
+		if x < -1 or x > 1:
+			continue
+		elif x <= -0.5:
+			time['-1<=x<=-0.5']+=1
+		elif x<= 0:
+			time['-0.5<x<=0']+=1
+		elif x<= 0.5:
+			time['0<x<=0.5']+=1
+		else:
+			time['0.5<x<=1']+=1
+	score_list=time.items()
+	en_motion=(
+		Pie()
+		.add(
+			"",score_list,radius=["40%", "75%"])
+		.set_global_opts(
+			title_opts=opts.TitleOpts(title=movie_name+"IMDB用户评论情感分析图",subtitle=None),
+			toolbox_opts=opts.ToolboxOpts(is_show=True),
+			legend_opts=opts.LegendOpts(
+			orient="vertical", pos_top="15%", pos_left="2%"
+			),
+		 )
+		.set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+		)
 		
 		
 	#将图加入页面中
@@ -284,6 +357,8 @@ def showing_pics(movie_name):
 	page.add(dbpoints)
 	page.add(Dpoints)
 	page.add(heat_map)
+	page.add(ch_motion)
+	page.add(en_motion)
 	page.render(movie_name+'\\'+movie_name+'数据图.html')
 	
 if __name__ == '__main__':

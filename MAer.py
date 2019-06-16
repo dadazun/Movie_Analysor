@@ -15,20 +15,8 @@ def search_movie():
 			path = c_add+'/'+movie_name
 			if os.path.exists(path):
 				c_add = os.getcwd()
-				#休眠半秒，这样不会弹出多个窗口
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'douban饼图.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'IMDB饼图.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'中文词云图.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'wordcloud.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'dbScore.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'IMDBScore.html')
-				time.sleep(0.5)
-				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'dbhotpoint.html')
+				#出图出数据
+				os.startfile(c_add + '/' + movie_name+'/'+movie_name+'数据图.html')
 				
 				info = tk.Toplevel()
 				info.title('评分信息')
@@ -47,17 +35,6 @@ def search_movie():
 			#若不在库中，则调用爬虫程序
 			else:
 				print('请耐心等待爬虫运行...')
-				'''
-				mes = tk.Toplevel()
-				mes.title('提示信息')
-				mes_bg=tk.Canvas(mes,bg='white',height=210,width=350)
-				mes_bg.pack()
-				mes_message=tk.Label(mes,text='请耐心等待爬虫运行...',
-					font=('黑体',20),bg='white',fg='#00bff3')
-				mes_message.place(x=175,y=40,anchor='center')
-				time.sleep(5)
-				mes.destroy
-				'''
 				os.makedirs(movie_name)
 				main(movie_name)
 			
