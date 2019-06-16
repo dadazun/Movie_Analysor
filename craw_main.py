@@ -4,13 +4,8 @@ from imdbcraw import *
 from dbcraw import *
 import threading
 import time
-from ciyuntuChinese import *
-from ciyuntuEnglish import *
-from piedouban import *
-from pieIMDB import *
-from scoredb import *
-from scoreD import *
-from rediantu import *
+from picmaker import *
+
 def main(name):
 	localtime = time.localtime(time.time())
 	print(localtime)
@@ -28,13 +23,7 @@ def main(name):
 	localtime = time.localtime(time.time())
 
 	#上面爬虫，下面出图
-	ciyun_ch(name)
-	ciyun_en(name)
-	db_months(name)
-	IMDB_months(name)
-	dbscore(name)
-	IMDBscore(name)
-	hotpoint(name)
+	showing_pics(name)
 
 	print(localtime)
 	print('完成')

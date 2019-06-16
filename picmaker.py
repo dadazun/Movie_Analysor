@@ -279,10 +279,11 @@ def showing_pics(movie_name):
 			
 	#中文情感分析图
 	with open(movie_name+'\\'+movie_name+"dbreview.txt",'r',encoding='utf-8') as f:
-		
+		#读取影评文件
 		text = f.read()
 		s = SnowNLP(text)
 		chn_senti = []
+		#进行情感分析并记录数据
 		for sent in s.sentences:
 			chn_senti.append(SnowNLP(sent).sentiments)
 	times={'0<=x<=0.25':0,'0.25<x<=0.5':0,'0.5<x<=0.75':0,'0.75<x<=1':0}
@@ -298,6 +299,7 @@ def showing_pics(movie_name):
 		else:
 			times['0.75<x<=1']+=1
 	scores_list=times.items()
+	#出图
 	ch_motion=(
 		Pie()
 		.add(
@@ -314,11 +316,11 @@ def showing_pics(movie_name):
 		
 	#英文情感分析图
 	with open(movie_name+'\\'+movie_name+"Dreview.txt",'r',encoding='utf-8') as f:
-		
+		#读取影评文件
 		text = f.read()
 		blob = TextBlob(text)
 		eng_senti = []
-
+		#进行情感分析并记录数据
 		for sent in blob.sentences:
 			eng_senti.append(sent.sentiment.polarity)
 	time={'-1<=x<=-0.5':0,'-0.5<x<=0':0,'0<x<=0.5':0,'0.5<x<=1':0}
@@ -334,6 +336,7 @@ def showing_pics(movie_name):
 		else:
 			time['0.5<x<=1']+=1
 	score_list=time.items()
+	#出图
 	en_motion=(
 		Pie()
 		.add(
