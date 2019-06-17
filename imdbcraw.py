@@ -17,8 +17,8 @@ def imdbcrawer(name):
 	#模拟登陆
 	'''
 	data1 = {
-	'name':'18617133843',
-	'password':'qq704748114',
+	'name':'',
+	'password':'',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'

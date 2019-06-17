@@ -13,10 +13,10 @@ def dbcrawer(name):
 	#创建会话窗口
 	session = requests.Session()
 	
-	#模拟登陆
+	#模拟登陆(请输入用户的用户名与密码)
 	data1 = {
-	'name':'13246812392',
-	'password':'a12345123',
+	'name':'',
+	'password':'',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'
@@ -82,7 +82,7 @@ def dbcrawer(name):
 			time.sleep(4.8+random.random())
 			
 if __name__ == '__main__':
-	dbcrawer('复仇者联盟4')
+	dbcrawer('憨豆特工')
 			
 	
 

@@ -260,22 +260,31 @@ def showing_pics(movie_name):
 				heat_1=heat_1.replace(i,"")
 		heat=heat_1.split()
 		heat_dic=Counter(heat)
+	#处理一些热点图数据库中没有的城市（此txt还要不停壮大）
+	with open('no city.txt','r+',encoding='utf-8-sig') as e:
+		no_city = e.read()
+		no_city_list=no_city.split(' ')
 	#整理数据
 	heat_list=[]
 	for place,times in heat_dic.items():
+		if place in no_city_list:
+			continue
 		c_word=(place,times)
 		heat_list.append(c_word)	
 	#出图
-	heat_map = (
-			Geo()
-			.add_schema(maptype="china")
-			.add("",heat_list)
-			.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
-			.set_global_opts(
-					visualmap_opts=opts.VisualMapOpts(),
-					title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
-			,toolbox_opts=opts.ToolboxOpts(is_show=True))
-			)	
+	try:
+		heat_map = (
+				Geo()
+				.add_schema(maptype="china")
+				.add("",heat_list)
+				.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+				.set_global_opts(
+						visualmap_opts=opts.VisualMapOpts(),
+						title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
+				,toolbox_opts=opts.ToolboxOpts(is_show=True))
+				)
+	except:
+		pass	
 			
 	#中文情感分析图
 	with open(movie_name+'\\'+movie_name+"dbreview.txt",'r',encoding='utf-8') as f:
@@ -359,13 +368,16 @@ def showing_pics(movie_name):
 	page.add(Eng_wordcloud)
 	page.add(dbpoints)
 	page.add(Dpoints)
-	page.add(heat_map)
 	page.add(ch_motion)
 	page.add(en_motion)
+	try:
+		page.add(heat_map)
+	except:
+		pass
 	page.render(movie_name+'\\'+movie_name+'数据图.html')
 	
 if __name__ == '__main__':
-	showing_pics('复仇者联盟4')
+	showing_pics('憨豆特工3')
 
 
 
