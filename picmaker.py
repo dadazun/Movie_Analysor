@@ -284,8 +284,7 @@ def showing_pics(movie_name):
 					,toolbox_opts=opts.ToolboxOpts(is_show=True))
 					)
 		except:
-			a=heat_list.pop(-1)
-	print(heat_list)	
+			a=heat_list.pop(-1)	
 			
 	#中文情感分析图
 	with open(movie_name+'\\'+movie_name+"dbreview.txt",'r',encoding='utf-8') as f:
