@@ -271,20 +271,21 @@ def showing_pics(movie_name):
 			continue
 		c_word=(place,times)
 		heat_list.append(c_word)	
-	#出图
-	try:
-		heat_map = (
-				Geo()
-				.add_schema(maptype="china")
-				.add("",heat_list)
-				.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
-				.set_global_opts(
-						visualmap_opts=opts.VisualMapOpts(),
-						title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
-				,toolbox_opts=opts.ToolboxOpts(is_show=True))
-				)
-	except:
-		pass	
+	#出图,反复产生图，来处理乱填地区的情况
+		try:
+			heat_map = (
+					Geo()
+					.add_schema(maptype="china")
+					.add("",heat_list)
+					.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+					.set_global_opts(
+							visualmap_opts=opts.VisualMapOpts(),
+							title_opts=opts.TitleOpts(title=movie_name+" 豆瓣观影热点图",subtitle=None)
+					,toolbox_opts=opts.ToolboxOpts(is_show=True))
+					)
+		except:
+			a=heat_list.pop(-1)
+	print(heat_list)	
 			
 	#中文情感分析图
 	with open(movie_name+'\\'+movie_name+"dbreview.txt",'r',encoding='utf-8') as f:
