@@ -41,7 +41,7 @@ def showing_pics(movie_name):
 	month_list1=time.items()
 	#出图
 	dbmonth=(
-		Pie()
+		Pie(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 		.add(
 			"",month_list1,radius=["40%", "75%"])
 		.set_global_opts(
@@ -80,7 +80,7 @@ def showing_pics(movie_name):
 	month_list2=time.items()
 	#出图
 	Dmonth=(
-		Pie()
+		Pie(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 		.add(
 			"",month_list2,radius=["40%", "75%"])
 		.set_global_opts(
@@ -121,7 +121,7 @@ def showing_pics(movie_name):
 			words_list.append(a_word)
 	#出图
 	Eng_wordcloud=(
-             WordCloud()
+             WordCloud(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
              .add("", words_list, word_size_range=[20, 100],shape="diamond")
              .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" WordCloud",subtitle=None)
              ,toolbox_opts=opts.ToolboxOpts(is_show=True))
@@ -160,7 +160,7 @@ def showing_pics(movie_name):
 			word_list.append(b_word)
 	#出图
 	Chn_wordcloud=(
-				 WordCloud()
+				 WordCloud(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 				 .add("", word_list, word_size_range=[20, 100],shape="diamond")
 				 .set_global_opts(title_opts=opts.TitleOpts(title=movie_name+" 中文词云图",subtitle=None)
 				 ,toolbox_opts=opts.ToolboxOpts(is_show=True))
@@ -201,7 +201,7 @@ def showing_pics(movie_name):
 				data.append(counting)
 	#出图
 	dbpoints=(
-			   ThemeRiver(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
+			   ThemeRiver(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 			   .add(
 				   ['很差','较差','还行','推荐','力荐'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
@@ -241,7 +241,7 @@ def showing_pics(movie_name):
 				data.append(counting)
 	#出图
 	Dpoints=(
-			   ThemeRiver(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
+			   ThemeRiver(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 			   .add(
 				   ['好评','中评','差评'],data,singleaxis_opts=opts.SingleAxisOpts(type_="time", pos_bottom="10%"),
 				   )
@@ -274,7 +274,7 @@ def showing_pics(movie_name):
 	#出图,反复产生图，来处理乱填地区的情况
 		try:
 			heat_map = (
-					Geo()
+					Geo(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 					.add_schema(maptype="china")
 					.add("",heat_list)
 					.set_series_opts(label_opts=opts.LabelOpts(is_show=False))
@@ -310,7 +310,7 @@ def showing_pics(movie_name):
 	scores_list=times.items()
 	#出图
 	ch_motion=(
-		Pie()
+		Pie(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 		.add(
 			"",scores_list,radius=["40%", "75%"])
 		.set_global_opts(
@@ -347,7 +347,7 @@ def showing_pics(movie_name):
 	score_list=time.items()
 	#出图
 	en_motion=(
-		Pie()
+		Pie(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
 		.add(
 			"",score_list,radius=["40%", "75%"])
 		.set_global_opts(
@@ -362,14 +362,10 @@ def showing_pics(movie_name):
 		
 		
 	#将图加入页面中
-	page.add(dbmonth)
-	page.add(Dmonth)
-	page.add(Chn_wordcloud)
-	page.add(Eng_wordcloud)
-	page.add(dbpoints)
-	page.add(Dpoints)
-	page.add(ch_motion)
-	page.add(en_motion)
+	page.add(dbmonth,Dmonth)
+	page.add(Chn_wordcloud,Eng_wordcloud)
+	page.add(dbpoints,Dpoints)
+	page.add(ch_motion,en_motion)
 	try:
 		page.add(heat_map)
 	except:
@@ -377,7 +373,7 @@ def showing_pics(movie_name):
 	page.render(movie_name+'\\'+movie_name+'数据图.html')
 	
 if __name__ == '__main__':
-	showing_pics('憨豆特工3')
+	showing_pics('功夫')
 
 
 
