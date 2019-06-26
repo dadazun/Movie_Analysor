@@ -130,7 +130,7 @@ def showing_pics(movie_name):
              
 	#中文词云图
 	#读取爬取的文本文件
-	filename=movie_name+'\\'+movie_name+'Dbreview.txt'
+	filename=movie_name+'\\'+movie_name+'dbreview.txt'
 	with open(filename,'r+',encoding='utf-8') as f:
 		rev_2 = f.read()
 		#中文分词
@@ -373,7 +373,7 @@ def showing_pics(movie_name):
 	page.render(movie_name+'\\'+movie_name+'数据图.html')
 	
 if __name__ == '__main__':
-	showing_pics('功夫')
+	showing_pics('大侦探皮卡丘')
 
 
 
