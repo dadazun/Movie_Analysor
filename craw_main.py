@@ -2,6 +2,8 @@
 import os
 from imdbcraw import *
 from dbcraw import *
+from mtcraw import *
+from rtcraw import *
 import threading
 import time
 from picmaker import *
@@ -11,7 +13,7 @@ def main(name):
 	print(localtime)
 
 	print('爬虫运行中...')
-	targets = [imdbcrawer,dbcrawer]
+	targets = [mtcrawer,rtcrawer,dbcrawer,imdbcrawer]
 	threads = []
 	for target in targets:
 		threads.append(threading.Thread(target=target,args=(name,)))
