@@ -16,13 +16,12 @@ def mtcrawer(name):
 	res1 = r1.text
 	id1 = compile(r'"id":(\d+)').search(res1).group(1)
 	for page in range(10):
-		res1=session.get(r'http://movie.mtime.com/'+id1+r'/reviews/short/new-'+str(page)+r'.html',headers=headers)
+		res1=session.get(r'https://movie.mtime.com/'+id1+r'/reviews/short/new-'+str(page)+r'.html',headers=headers)
 		resp1 = BeautifulSoup(res1.content.decode('utf-8'),features="html.parser")
 		with open(name+'\\'+name+'dbreview.txt','a',encoding='utf-8') as rv:
 			sho5 = resp1.find_all('h3')
 			for so in sho5:
 				rv.write(so.text)
-
 
 if __name__ == '__main__':
 	mtcrawer('复仇者联盟4')

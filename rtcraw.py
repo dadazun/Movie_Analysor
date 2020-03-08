@@ -23,7 +23,7 @@ def rtcrawer(name):
 	#进入豆瓣电影首页
 	res2 = session.get(r'https://movie.douban.com/subject/'+sid,headers=headers)
 	#从豆瓣获得电影的imdb的网址
-	regex2 = compile(r'http://www.imdb.com/title/([a-zA-Z]*\d*)')
+	regex2 = compile(r'https://www.imdb.com/title/([a-zA-Z]*\d*)')
 	mid = regex2.search(res2.text).group(1)
 	#从imdb获得电影的英文名
 	r3 = session.get(r'https://www.imdb.com/title/'+mid+r'/')

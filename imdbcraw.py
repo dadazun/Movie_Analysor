@@ -42,8 +42,10 @@ def imdbcrawer(name):
 		pt.write('豆瓣:'+rr2.find('strong',class_="ll rating_num").text+'/10 ')
 		pt.write(rr2.find('span',property="v:votes").text+'人评价\n')
 	#从豆瓣获得电影的imdb的网址
-	regex2 = compile(r'http://www.imdb.com/title/([a-zA-Z]*\d*)')
+	regex2 = compile(r'https://www.imdb.com/title/([a-zA-Z]*\d*)')
+
 	mid = regex2.search(res2.text).group(1)
+
 	#获得IMDB评分
 	with open(name+'\\'+name+'Points.txt','a',encoding='utf-8') as pt:
 		r1 = requests.get(r'https://www.imdb.com/title/'+mid,headers=headers)
@@ -118,6 +120,6 @@ def imdbcrawer(name):
 			resp4 = BeautifulSoup(res4.text,features="html.parser")
 		page += 1
 
-		
+
 if __name__ == '__main__':
 	imdbcrawer('复仇者联盟4')

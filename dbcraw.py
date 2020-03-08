@@ -15,8 +15,8 @@ def dbcrawer(name):
 	
 	#模拟登陆(请输入用户的用户名与密码)
 	data1 = {
-	'name':'',
-	'password':'',
+	'name':'13246812392',
+	'password':'a123451234',
 	'remember':'false'
 	} 
 	url1 = r'https://accounts.douban.com/j/mobile/login/basic'

@@ -9,6 +9,7 @@ import time
 from picmaker import *
 
 def main(name):
+
 	localtime = time.localtime(time.time())
 	print(localtime)
 
